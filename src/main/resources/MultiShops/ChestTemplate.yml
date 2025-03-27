@@ -1,0 +1,30 @@
+key: chest1
+type: CHEST
+location: world:-154:63:-786
+hologram_lines:
+  - "Misc"
+  - "Useless junk"
+hologram_icon: GOLD_INGOT
+title: "Misc"
+size: 27
+slots:
+  0:
+    itemstack: "|
+  i:
+    ==: org.bukkit.inventory.ItemStack
+    v: 3578
+    type: POINTED_DRIPSTONE"
+    buy_price: 100
+    sell_price: 10
+    1:
+      itemstack: "|
+  i:
+    ==: org.bukkit.inventory.ItemStack
+    v: 3578
+    type: YELLOW_WOOL"
+      buy_price: 50
+  sell_price: 5
+unused:
+  material: "BLACK_STAINED_GLASS_PANE"
+  name: ""
+  lore: []

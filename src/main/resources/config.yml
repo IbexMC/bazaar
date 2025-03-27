@@ -1,0 +1,225 @@
+# ====================================================================================================
+#                                           Bazaar Config
+# ====================================================================================================
+# In the example below, you would not get debug messages, shop history would not be saved, shop
+# create/remove time would be 14 seconds, the prefix would be [Bazaar] (colored), the currency
+# symbol would be $ (an example of money would be $100), it would cost 5 to create the shop, it would
+# cost 10 to create a clan shop, it would have a 2% sales tax and your items could not contain the
+# words qwerty or asdfgh in the name or description.
+# Example:
+#   debug_logging: false
+#   debug_to_file: false
+#   save_history: false
+#   shop_edit_timeout: 15
+#   message_prefix: "&6[&fBazaar&6]&r"
+#   currency_symbol: "$"
+#   create_cost: 5
+#   create_cost_clan: 10
+#   sales_tax: 2
+#   banned_words:
+#     - "qwerty"
+#     - "asdfgh"
+# ====================================================================================================
+
+# If you wish to save to MySQL database instead of file, make sure to fill this section in with the appropriate
+# information, and set use = true
+# If you have use set to true, your MySQL database MUST be accessible or Bazaar will error out
+# If you do not wish to use MySQL, leave use = false, and the shop data will be saved in your data folder
+mysql:
+  # If true, Bazaar will attempt to use the database
+  use: false
+  # Your hostname/IP address
+  host: "your_host"
+  # Your MySQL port (default is 3306)
+  port: 3306
+  # Your database name, defaults to "ibex" but can be any existing database
+  # Database MUST exist before running
+  database: "ibex"
+  # Your username and password must have permission to your database
+  username: "your_username"
+  password: "your_password"
+
+# debug_logging indicates whether additional debugging information should be displayed to the console
+debug_logging: false
+
+# debug_to_file indicates whether debug_logging should also output to a file
+debug_to_file: false
+
+# save_history indicates whether buy/sell history should be recorded (can lead to large log files)
+save_history: false
+
+# click.left and click.right control which button is set for BUY and which is SELL.  Entries may ONLY
+# be BUY or SELL and cannot both be the same.  If either is incorrect, it will default to
+# left = BUY, right = SELL
+click:
+  left: BUY
+  right: SELL
+
+# shop_create_timeout is the number of seconds allowed before timing out a /shop create command
+shop_edit_timeout: 15
+
+# Sets the default cooldown that will be used unless overridden when creating the shop
+default_cooldown: 5
+
+# message_prefix is the tag displayed before messages to the player
+message_prefix: "&6[&fBazaar&6]&r"
+
+# currency_symbol is the symbol used for money transactions
+currency_symbol: "$"
+
+# create_cost is the cost to create a new shop
+create_cost: 5
+
+# create_cost_clan is the cost to create a new clan owned shop
+create_cost_clan: 10
+
+# buy_sell_safeguard if true will prevent the shop buying at a higher price than it sells
+buy_sell_safeguard: true
+
+# sales_tax is the percentage charged against the shop sales (does not apply to players selling to shops)
+sales_tax: 2
+
+# banned_words is a list of words that are banned in the shop for item names and descriptions
+banned_words:
+  - "word1"
+  - "word2"
+
+# invalid_worlds is a list of worlds that you cannot create a shop in
+invalid_worlds:
+  - world_nether
+  - world_the_end
+
+# invalid_items is a list of Minecraft materials that you cannot create a shop for
+invalid_items:
+  - DRAGON_HEAD
+  - BEDROCK
+
+# server_account allows the use a server account in the economy to send/receive payments with an actual
+# balance.  If the server account runs out of money, payments will cease.  This can be used to keep
+# your server economy from spiraling unchecked.  It does require that you use an economy plugin that
+# allows a server account, such as The New Economy (TNE).
+server_account:
+  # account is the account name or UUID that is being used as the server account
+  # it MUST match the server account name/uuid that is set up in your economy
+  account: "DomainWorldBank"
+  # If infinite stock is true, the server stores will have an infinite inventory
+  # in a similar fashion to an admin store, if not, they will need to be restocked
+  # by someone with appropriate permissions
+  infinite_stock: true
+
+# display_out_of_stock is a true/false flag for if an Out of Stock message is displayed when a non-infinite stock
+# store does not have enough stock to complete a trade.  Defaults to true.
+# DEPRECATED - Use hologram.show_out_of_stock
+display_out_of_stock: true
+
+# If set, messages the seller if they are online when a player makes a purchase from one of their shops
+message_seller_on_purchase: true
+
+# If true, transactions will be logged directly to console.  This may cause a significant amount of noise
+# in your logs for large servers.
+log_sales_to_console: true
+
+# If using Domain protection, set domain_protection to true
+domain_protection: false
+
+# If using WorldGuard protection, set worldguard_protection to true
+worldguard_protection: false
+
+# WorldGuard flag name and values  (true = allow, false = deny)
+# worldguard.create_shop - Controls whether a shop can be created in the region
+# worldguard.use_admin_shop - Controls whether players can access admin shops in the region
+# worldguard.use_player_shop - Controls whether players can access player shops in the region
+# worldguard.use_clan_shop - Controls whether player can access clan shops in the region
+worldguard:
+  create_shop:
+    flag: "create-shop"
+    default: false
+  use_admin_shop:
+    flag: "use-admin-shop"
+    default: false
+  use_player_shop:
+    flag: "use-shop"
+    default: false
+  use_clan_shop:
+    flag: "use-clan-shop"
+    default: false
+
+# If true, worldguard_only_shops will restrict shops being created except in WorldGuard regions
+# which have the create-shop flag assigned.  Players will still need bazaar.create permission
+# but will not be able to create shops outside assigned areas
+worldguard_only_shops: false
+
+# Shop Cleanup
+shop_cleanup:
+  # The number of seconds between runs for the cleanup job for missing shops if WorldEdit or similar removes the chest
+  # Each time the timer runs, it will check each shop to ensure there is a Chest or Barrel at the location
+  # and if not, will remove the shop. Any number below 1 will prevent the cleanup from happening
+  seconds: 60
+  # If true, if a shop is removed during cleanup because a Chest or Barrel was not found, will delete the
+  # shop permanently. If false, it will only remove the shop until the next reload
+  delete: true
+
+hologram:
+  # This is your choice of hologram plugin.  Currently, only DecentHolograms is supported due
+  # to Holographic Displays ending development.
+  # Additional hologram plugins may be added in the future.
+  # Valid entries:
+  # 0 = None
+  # 1 = DecentHolograms (recommended - https://www.spigotmc.org/resources/decentholograms-1-8-1-20-2-papi-support-no-dependencies.96927/)
+  # The selected plugin MUST be installed
+  plugin: 1
+  # If true, when the item is out of stock, an Out of Stock message will be added to the hologram
+  show_out_of_stock: true
+  # If true, the price line will show when out of stock
+  show_price_out_of_stock: true
+  # If true, shows whatever enchantments the item has
+  show_enchantments: true
+  # If true, shows the potion type if applicable
+  show_potion_type: true
+  # If true, the holograms will only show if the shop is targeted
+  # This may cause performance issues for large servers as it has to loop through all online players
+  # Defaults to false so holograms show at all times.
+  show_only_if_targeted: false
+  # If true, the icon will always show, and the text will only show if targeted when show_only_if_targeted is true
+  show_icon_always_text_if_targeted: true
+
+# If true, will try and use the local language for item/enchantments (1.17+ only)
+use_local_translate: true
+
+# Number of ticks between checking if a shop is targeted.  For large servers, this number should be 20+
+# (with 20 ticks = 1 second) - For small servers, you can set this lower.  Minimum is 5
+shop_target_ticks: 20
+
+# This section of the config allows you to create an alias (language specific or otherwise) to replace
+# the /shop command and any of the included arguments.  Leaving the entry as a blank string like "" will
+# prevent that argument being aliased at all.
+commands:
+  shop:
+    # Alias is the command that will replace /shop - If blank, no aliasing will be done
+    alias: ""
+    # Create is the '/shop create' alias
+    create: ""
+    # Create_admin is the 'admin' alias used in /shop create -admin
+    create_admin: ""
+    # Create_server is the 'server' alias used in /shop create -server
+    create_server: ""
+    # Create_clan is the 'clan' alias used in /shop create -clan
+    create_clan: ""
+    # Create_cooldown is the 'c' (cooldown) alias used in /shop create -c
+    create_cooldown: ""
+    # Remove is the '/shop remove' alias
+    remove: ""
+    # Cancel is the '/shop cancel' alias
+    cancel: ""
+    # Debug is the '/shop debug' alias
+    debug: ""
+    # Help is the '/shop help' alias
+    help: ""
+    # Reload is the '/shop reload' alias
+    reload: ""
+    # Version is the '/shop version' alias
+    version: ""
+    # Transfer_to_database is the '/shop transfer_to_database' alias
+    transfer_to_database: ""
+    # Transfer_to_file is the '/shop transfer_to_file' alias
+    transfer_to_file: ""

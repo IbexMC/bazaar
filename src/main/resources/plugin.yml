@@ -1,0 +1,12 @@
+name: Bazaar
+main: com.ibexmc.bazaar.Bazaar
+version: '${project.version}'
+api-version: 1.14
+commands:
+  bazaar:
+    description: Runs the shop commands
+    usage: /bazaar
+  shop:
+    description: Runs the shop commands
+    usage: /shop
+softdepend: [HolographicDisplays, DecentHolograms, ProtocolLib, Domain, Myriad, Vault, WorldGuard]
